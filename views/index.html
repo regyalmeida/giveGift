@@ -28,6 +28,26 @@
 
   <body id="page-top">
 
+ <script>
+   window.fbAsyncInit = function() {
+     FB.init({
+       appId      : '490726977954779',
+       cookie     : true,
+       xfbml      : true,
+       version    : '{latest-api-version}'
+     });
+     FB.AppEvents.logPageView();
+   };
+
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.10&appId=490726977954779";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
     <!-- MENU -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
@@ -53,7 +73,7 @@
         </div>
       </div>
     </nav>
-    
+
     <!--INICIO-->
     <header class="masthead">
       <div class="header-content">
@@ -61,6 +81,7 @@
              <button type="button" class="btn btn-facebook btn-xlface" onclick="window.location.href='usuario/profile.html';">
                  Facebook
             </button>
+            <div class="fb-login-button" data-width="140" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true" onclick="window.location.href='usuario/profile.html';"></div>
         </div>
         <div class="header-content-inner">
           <hr>
@@ -71,7 +92,7 @@
         </div>
       </div>
     </header>
-      
+
     <!--SOBRE-->
     <section class="bg-primary" id="about">
       <div class="container">
@@ -85,7 +106,7 @@
         </div>
       </div>
     </section>
-      
+
     <!--DÚVIDAS-->
     <section id="services">
       <div class="container">
@@ -129,7 +150,7 @@
         </div>
       </div>
     </section>
-    
+
     <!--PREVIA-->
     <section class="p-0" id="portfolio">
       <div class="container-fluid">
@@ -173,7 +194,7 @@
         </div>
       </div>
     </section>
-    
+
     <!--
     <div class="call-to-action bg-dark">
       <div class="container text-center">
