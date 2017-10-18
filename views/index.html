@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
   <head>
 
@@ -23,88 +23,68 @@
 
     <!-- Custom styles for this template -->
     <link href="css/creative.css" rel="stylesheet">
-
+      
   </head>
 
   <body id="page-top">
-
- <script>
-   window.fbAsyncInit = function() {
-     FB.init({
-       appId      : '490726977954779',
-       cookie     : true,
-       xfbml      : true,
-       version    : '{latest-api-version}'
-     });
-     FB.AppEvents.logPageView();
-   };
-
-
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.10&appId=490726977954779";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
+      
     <!-- MENU -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-      <div class="container">
-        <!--<a class="navbar-brand js-scroll-trigger" href="#page-top">GiveGift</a>-->
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#about">Sobre</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#services">Dúvidas</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#portfolio">Prévia</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#contact">Contato</a>
-            </li>
-          </ul>
+        <div class="container">
+            <!--<a class="navbar-brand js-scroll-trigger" href="#page-top">GiveGift</a>-->
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                      <a class="nav-link js-scroll-trigger" href="#about">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link js-scroll-trigger" href="#services">Dúvidas</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link js-scroll-trigger" href="#portfolio">Prévia</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link js-scroll-trigger" href="#contact">Contato</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
     </nav>
 
     <!--INICIO-->
     <header class="masthead">
-      <div class="header-content">
-        <div class=text-right>
-             <button type="button" class="btn btn-facebook btn-xlface" onclick="window.location.href='usuario/profile.html';">
-                 Facebook
-            </button>
-            <div class="fb-login-button" data-width="140" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true" onclick="window.location.href='usuario/profile.html';"></div>
+        <div class="header-content">
+            <div class=text-right>
+                <button type="button" class="btn btn-facebook btn-xlface" onclick="javascript:login();">
+                     Facebook
+                </button>
+                <div class="fb-login-button" data-width="140" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true" onclick="window.location.href='usuario/profile.html';"></div>
+            </div>
+            <div class="header-content-inner">
+                <hr>
+                <h1 id="homeHeading">Sua forma favorita de presentear os amigos</h1>
+                <hr>
+                <p>Com o GiveGift é possível encontrar o presente perfeito</p>
+                <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Saiba mais</a>
+            </div>
         </div>
-        <div class="header-content-inner">
-          <hr>
-          <h1 id="homeHeading">Sua forma favorita de presentear os amigos</h1>
-          <hr>
-          <p>Com o GiveGift é possível encontrar o presente perfeito</p>
-          <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Saiba mais</a>
-        </div>
-      </div>
     </header>
 
     <!--SOBRE-->
     <section class="bg-primary" id="about">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto text-center">
-            <h2 class="section-heading text-h ">Nós temos o que você precisa</h2>
-            <hr class="hr">
-            <p class="text-faded">Se você não sabe como presentear seu colega, amigo ou parente, o GiveGift é a melhor escolha. Deixe que nós encontremos o presente perfeito. Faça login com o Facebook e descubra como é fácil!</p>
-            <a class="btn btn-primary btn-xl js-scroll-trigger" href="#services">Ainda tem dúvidas?</a>
-          </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="section-heading text-h ">Nós temos o que você precisa</h2>
+                    <hr class="hr">
+                    <p class="text-faded">Se você não sabe como presentear seu colega, amigo ou parente, o GiveGift é a melhor escolha. Deixe que nós encontremos o presente perfeito. Faça login com o Facebook e descubra como é fácil!</p>
+                    <a class="btn btn-primary btn-xl js-scroll-trigger" href="#services">Ainda tem dúvidas?</a>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
     <!--DÚVIDAS-->
@@ -244,6 +224,12 @@
     <!-- Custom scripts for this template -->
     <script src="js/creative.min.js"></script>
 
+    <!-- API Facebook -->
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
+    
+    <!-- Login com facebook -->
+    <script src="js/facebook.js"></script>
+    
   </body>
 
 </html>
