@@ -35,9 +35,9 @@
     <body id="page-top">
         <div class="container-fluid">
             <div class="fb-profile">
-                
+
                 <img class="fb-image-lg" src="../img/background_user.png" alt="Profile image example"/>
-                
+
                 <div class="text-center fb-location-profile">
                     <img class="fb-image-profile img-circle" src="../img/usuario.jpg" alt="Profile image example"/>
                     <div class="fb-profile-text">
@@ -49,8 +49,8 @@
         <div class="container-fluid">
 
             <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
-                
-                
+
+
                 <div class="btn-group" role="group">
                     <button type="button" id="following" class="btn btn-primary" href="#tab0" data-toggle="tab"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                         <div class="hidden-xs">Home</div>
@@ -82,9 +82,9 @@
             <div class="well">
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="tab0">
-                        
+
                         <div class="tab-pane fade in" id="tab0">
-                            
+
                             <!-- INICIO NAVBAR -->
                             <nav class="navbar navbar-default" role="navigation">
                                 <div class="container">
@@ -99,17 +99,17 @@
                                     <div class="collapse navbar-collapse" id="navbar-brand-centered">
                                         <ul class="nav navbar-nav">
                                             <li><a class="nav-link js-scroll-trigger" href="#principais">Principais amigos</a></li>
-                                            <li><a class="nav-link js-scroll-trigger" href="../index.html">Sair</a></li>
+                                            <li><a class="nav-link js-scroll-trigger" onclick="window.location.href='../index.html';FB.Logout();">Sair</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </nav>
                             <!-- FIM NAV BAR -->
-                            
-                            
+
+
                             <div class="text-center" id="principais"><h4>Principais amigos</h4></div>
                             <hr/>
-                            <div class="row col-xs-12"> 
+                            <div class="row col-xs-12">
                                  <div class="form-group">
                                      <div class="input-group">
                                          <input type="text" class="form-control" placeholder="Pesquisar amigos">
@@ -125,7 +125,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="panel panel-default">    
+                                    <div class="panel panel-default">
                                         <div class="row" style="display: none;">
                                             <div class="col-xs-12">
                                                 <div class="input-group c-search">
@@ -227,18 +227,18 @@
                                 </div>
                             </div>
                             <!-- FIM PRINCIPAIS -->
-        
-                            
+
+
                         </div>
-                        
+
                     </div>
-                    
+
                     <!-- PESQUISAR AMIGOS -->
                     <div class="tab-pane fade in" id="tab1">
 
                         <div class="text-center"><h4>Visualizar recomendações</h4></div>
                         <hr/>
-                        <div class="row col-xs-12"> 
+                        <div class="row col-xs-12">
                                  <div class="form-group">
                                      <div class="input-group">
                                          <input type="text" class="form-control" placeholder="Pesquisar amigos">
@@ -254,7 +254,7 @@
                              </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <div class="panel panel-default">    
+                                <div class="panel panel-default">
                                     <div class="row" style="display: none;">
                                         <div class="col-xs-12">
                                             <div class="input-group c-search">
@@ -361,7 +361,7 @@
                     <div class="tab-pane fade in" id="tab2">
                         <div class="text-center"><h4>Aniversariantes do mês</h4></div>
                         <hr/>
-                            <div class="row col-xs-12"> 
+                            <div class="row col-xs-12">
                                  <div class="form-group">
                                      <div class="input-group">
                                          <input type="text" class="form-control" placeholder="Pesquisar aniversariantes">
@@ -377,7 +377,7 @@
                              </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <div class="panel panel-default">    
+                                <div class="panel panel-default">
                                     <div class="row" style="display: none;">
                                         <div class="col-xs-12">
                                             <div class="input-group c-search">
@@ -532,8 +532,8 @@
                     <div class="tab-pane fade in" id="tab3">
                         <div class="text-center"><h4>Minhas recomendações</h4></div>
                         <hr/>
-                        
-                        <div class="row col-xs-12"> 
+
+                        <div class="row col-xs-12">
                              <div class="form-group">
                                  <div class="input-group">
                                      <input type="text" class="form-control" placeholder="Pesquisar produtos">
@@ -627,7 +627,7 @@
                     </div>
                     <!-- FIM DAS CONFIGURAÇÕES -->
                 </div>
-            </div>            
+            </div>
         </div>
 
 
@@ -636,7 +636,7 @@
         <script src="../js/user.js"></script>
         <!-- JavaScrip Search Plugin -->
         <script src="//rawgithub.com/stidges/jquery-searchable/master/dist/jquery.searchable-1.0.0.min.js"></script>
-        
+
         <!-- Bootstrap core JavaScript -->
         <script src="../vendor/popper/popper.min.js"></script>
 
@@ -650,5 +650,3 @@
 
     </body>
 </html>
-
-
