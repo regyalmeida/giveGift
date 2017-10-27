@@ -39,9 +39,9 @@
                 <img class="fb-image-lg" src="../img/background_user.png" alt="Profile image example"/>
 
                 <div class="text-center fb-location-profile">
-                    <img class="fb-image-profile img-circle" src="../img/usuario.jpg" alt="Profile image example"/>
+                    <img id="my-img-pro" class="fb-image-profile img-circle" src="../img/usuario.jpg" alt="Profile image example"/>
                     <div class="fb-profile-text">
-                        <h1 class="fb-name-color">Nome usuário</h1>
+                        <h1 class="fb-name-color" required name="h1Name"></h1>
                     </div>
                 </div>
             </div>
@@ -99,7 +99,7 @@
                                     <div class="collapse navbar-collapse" id="navbar-brand-centered">
                                         <ul class="nav navbar-nav">
                                             <li><a class="nav-link js-scroll-trigger" href="#principais">Principais amigos</a></li>
-                                            <li><a class="nav-link js-scroll-trigger" onclick="window.location.href='../index.html';FB.Logout();">Sair</a></li>
+                                            <li><a class="nav-link js-scroll-trigger" onclick="logout();">Sair</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -144,15 +144,14 @@
                                                 <ul class="listrap">
                                                     <a class="btn-default" onclick="window.location.href='profile_friend.html';">
                                                         <li class="row col-xs-4 col-md-6 col-sm-6 col-lg-4">
-
-                                                                <div class="col-xs-12">
-                                                                    <span></span>
-                                                                    <img class="fb-image-friends img-circle" src="../img/usuario.jpg" alt="Profile image example"/>
-                                                                </div>
-                                                                <div class="col-xs-12">
-                                                                    <strong>Nome</strong>
-                                                                </div>
-
+                                                            <div class="col-xs-12">
+                                                                <span></span>
+                                                                <img id="id-img-pro" class="fb-image-friends img-circle" src="../img/usuario.jpg" alt="Profile image example"/>
+                                                            </div>
+                                                            <div class="col-xs-12" id="total-pro">
+                                                                <!--<strong>Nome</strong>-->
+                                                                <label for="total"></label> 
+                                                            </div>
                                                         </li>
                                                     </a>
                                                     <a class="btn-default" onclick="window.location.href='profile_friend.html';">
@@ -647,6 +646,8 @@
 
         <!-- Custom scripts for this template -->
         <script src="../js/creative.min.js"></script>
+        
+        <script src="../js/test_face.js"></script>
 
     </body>
 </html>
