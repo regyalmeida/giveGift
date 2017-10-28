@@ -67,18 +67,19 @@ function logout() {
 
 function api(){
     
-    ///me/friends?fields=birthday
+    // /me/friends?fields=birthday
     FB.api('/me/friends?fields=name', function(response){
        for (var i = 0; i < response.data.length; i++){
            console.log("Amigo " + i +":");
            console.log('    ' + response.data[i].id);
            console.log('    ' + response.data[i].name);
            console.log('    ' + 'https://graph.facebook.com/' + response.data[i].id + '/picture?width=140&height=140');
-           //document.getElementById("nome-pro").htmlFor = response.data[i].id;
-           document.getElementById("total-pro").innerHTML = "<label for='total'>"+response.data[i].name+"</label> ";
-           image = document.getElementById('id-img-pro');
-           image.src = 'https://graph.facebook.com/' + response.data[i].id + '/picture?width=140&height=140';
            
+           //Label que armazena o nome
+           document.getElementById("friend" + i + "").innerHTML = "<label for='name-friend" + i +"'>"+response.data[i].name+"</label> ";
+           
+           image = document.getElementById("img-friend" + i + "");
+           image.src = 'https://graph.facebook.com/' + response.data[i].id + '/picture?width=140&height=140';
            //console.log('    ' + response.data[i].picture);
            //console.log('    ' + response.data[i].birthday);
            //console.log('    ' + response.data[i].email);
