@@ -16,11 +16,13 @@ window.fbAsyncInit = function() {
             console.log('Logged in.');
             console.log(uid);
             console.log(accessToken);
-            FB.api('/me', function(response) {
+            FB.api('/me?fields=id,name,age_range,books.limit(10),games.limit(10),movies.limit(10),music.limit(10),birthday', function(response) {
                 console.log('Good to see you, ' + response.name + '.');
                 console.log('Your picture ' + 'https://graph.facebook.com/' + uid + '/picture?width=140&height=140');
                 image = document.getElementById('my-img-pro');
                 image.src = 'https://graph.facebook.com/' + uid + '/picture?width=140&height=140';
+                console.log(response);
+                localStorage.setItem(uid, JSON.stringify(response));//Salva no local storage as informacoes do usuario logado
                 api();
             });
         }
@@ -46,7 +48,7 @@ function login() {
         if (response.status === 'connected') {
             window.location = "../usuario/profile.html";
         }
-    }, {scope: 'public_profile,email,user_friends,user_actions:give_gift'});  
+    }, {scope: 'public_profile,email,user_friends,email,user_likes'});  
 };
 
 function jsonParser(response) {
@@ -68,21 +70,44 @@ function logout() {
 function api(){
     
     // /me/friends?fields=birthday
-    FB.api('/me/friends?fields=name', function(response){
+    FB.api('/me/friends?fields=id,name,age_range,music.limit(10),movies.limit(10),books.limit(10),games.limit(10)', function(response){
        for (var i = 0; i < response.data.length; i++){
            console.log("Amigo " + i +":");
            console.log('    ' + response.data[i].id);
            console.log('    ' + response.data[i].name);
            console.log('    ' + 'https://graph.facebook.com/' + response.data[i].id + '/picture?width=140&height=140');
            
-           //Label que armazena o nome
-           document.getElementById("friend" + i + "").innerHTML = "<label for='name-friend" + i +"'>"+response.data[i].name+"</label> ";
+           document.getElementById("friend" + i + "").innerHTML = 
+               "<label id='name-friend" + i + "' for='name-friend" + i + "' value='" + i + "'>"+response.data[i].name+"</label> ";
            
            image = document.getElementById("img-friend" + i + "");
            image.src = 'https://graph.facebook.com/' + response.data[i].id + '/picture?width=140&height=140';
            //console.log('    ' + response.data[i].picture);
            //console.log('    ' + response.data[i].birthday);
            //console.log('    ' + response.data[i].email);
+           
+           //console.log(response.data);
        }
    });
+}
+
+function profile(id){
+    
+    FB.api('/me/friends?fields=name', function(response){
+
+        
+        //Armazena os dados
+        localStorage.setItem("name_friend", response.data[id].name);
+        
+        var tmp = 'https://graph.facebook.com/' + response.data[id].id + '/picture?width=140&height=140';
+        localStorage.setItem("pic_friend", tmp);
+        
+        localStorage.setItem("id_friend", response.data[id].id);
+        
+        //Chama o profile do amigo
+        window.location = 'profile_friend.html';
+    });
+    //var id_friend = document.getElementById('name-friend0').value;
+    //console.log(id_friend);
+    
 }
