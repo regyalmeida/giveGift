@@ -17,7 +17,7 @@ function profile(){
     console.log(id_friend);
     
     //Recupera o json armazenado para consultar os dados do amigo
-    var resp = localStorage.getItem(id_friend);
+    var resp = localStorage.getItem(1145650655565704);
    
     console.log(resp);
 }
