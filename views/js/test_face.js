@@ -88,19 +88,14 @@ function api(){
 
            image = document.getElementById("img-friend" + i + "");
            image.src = 'https://graph.facebook.com/' + response.data[i].id + '/picture?width=140&height=140';
-           //console.log('    ' + response.data[i].picture);
-           //console.log('    ' + response.data[i].birthday);
-           //console.log('    ' + response.data[i].email);
-
-           //console.log(response.data);
         }
 
-        /*
+        
         //CARREGA 'TODOS':
         for (var i = 0; i < response.data.length; i++){
 
-           document.getElementById("friend" + i + "").innerHTML =
-               "<label id='name-friend" + i + "' for='name-friend" + i + "' value='" + i + "'>"+response.data[i].name+"</label> ";
+           document.getElementById("all-friend" + i + "").innerHTML =
+               "<label id='name-all-friend" + i + "' for='name-all-friend" + i + "' value='" + i + "'>"+response.data[i].name+"</label> ";
 
            image = document.getElementById("img-all-friend" + i + "");
            image.src = 'https://graph.facebook.com/' + response.data[i].id + '/picture?width=140&height=140';
@@ -109,7 +104,7 @@ function api(){
            //console.log('    ' + response.data[i].email);
 
            //console.log(response.data);
-       }*/
+       }
    });
 }
 
