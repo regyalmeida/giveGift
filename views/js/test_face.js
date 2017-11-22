@@ -150,7 +150,7 @@ $.get("https://sandbox-api.lomadee.com/v2/1508440137937e31d5fb8/product/_search?
 
 });
 
-var keyword1 = "Crepusculo";
+var keyword1 = "Harry Potter";
 $.get("https://sandbox-api.lomadee.com/v2/1508440137937e31d5fb8/product/_search?sourceId=35860773&keyword=" + keyword1, function(data){
 
     var produtos1 = data["products"];
@@ -165,7 +165,7 @@ $.get("https://sandbox-api.lomadee.com/v2/1508440137937e31d5fb8/product/_search?
 
 });
 
-var keyword2 = "Mochila";
+var keyword2 = "Sociedade Esportiva Palmeiras";
 $.get("https://sandbox-api.lomadee.com/v2/1508440137937e31d5fb8/product/_search?sourceId=35860773&keyword=" + keyword2, function(data){
 
     var produtos2 = data["products"];
