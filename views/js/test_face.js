@@ -31,12 +31,10 @@ window.fbAsyncInit = function() {
                 console.log(response);
                 localStorage.setItem(uid, JSON.stringify(response));//Salva no local storage as informacoes do usuario logado
                 
-                //console.log("Idade: " +response.age_range.min);
-                //console.log("Data de aniversario: " + response.birthday);
-                
                 //Passa os livros
-                //getBooks(response.books);
+                getBooks(response.books, 0);
                 
+                //Recupera informações de usuarios
                 api();
             });
         }
@@ -189,13 +187,12 @@ function profile(id){
 }
 
 //Recupera livros
-function getBooks(books){
+function getBooks(books, tipo){
     
     var keyword;
     console.log(books);
     
-    for (var i = 0; i < 10; i++){
-        
+    for (var i = 0; i < 1; i++){
         keyword = books.data[i].name;
         $.get("https://sandbox-api.lomadee.com/v2/1508440137937e31d5fb8/product/_search?sourceId=35860773&keyword=" + keyword, function(data){
             var produtos = data["products"];
@@ -205,55 +202,54 @@ function getBooks(books){
             }
             else{
                 console.log(produtos[0]);
+                
+                if (tipo == 0){
+                    localStorage.setItem("my-livros", JSON.stringify(produtos));    
+                }
+                else{
+                    localStorage.setItem("friend-livros", JSON.stringify(produtos));    
+                }
+                
+                document.getElementById("my-product").innerHTML += "<ul class='listrap' id='my-product' for='my-product'>"
+                    + "<li class='row col-xs-12 col-md-4'>"
+                    + "<div class='thumbnail'>" 
+                    + "<a data-toggle='modal' data-target='#basicModal'>"
+                    + "<img id='img-prod" + i + "' src='' class='fb-image-products'/></a></div>" 
+                    + "<ul class='list-inline'>"
+                    + "<li><label id='pricemin-prod" + i + "' for='pricemin-prod" + i + "'>" + produtos[0].priceMin + "</label></li>"
+                    + "<li><label id='name-prod" + i + "' for='name-prod" + i + "'>" + produtos[0].name + "</label></li>"
+                    + "<li class='pull-right'></li></ul>"
+                    + "<a href='#' id='det-prod" + i + "' class='btn btn-warning' data-toggle='modal' data-target='#basicModal'"
+                    + "onclick='getDetalhes(" + tipo + ")'>Detalhes</a>"
+                    + "<a id='link-prod" + i + "' href='" + produtos[0].link + "' class='btn btn-success col-md-6'>Comprar</a></li>"
+                    + "</ul>";
+                
+                image = document.getElementById("img-prod" + i + "");
+                image.src = produtos[0].thumbnail.url;
             }
         });
     }
 }
 
-/*
-var keyword = "Sapiens";
-
-$.get("https://sandbox-api.lomadee.com/v2/1508440137937e31d5fb8/product/_search?sourceId=35860773&keyword=" + keyword, function(data){
-
-    var produtos = data["products"];
-
-    // aqui você faza a manipulação do json, exemplo:
-    //console.log(produtos["0"]);
-
-    document.getElementById("priceMin").innerHTML = "<label id='priceMin' for='priceMin'>"+ produtos["0"].priceMin + "</label> ";
-    document.getElementById("name").innerHTML = "<label id='name' for='name'>"+ produtos["0"].name + "</label> ";
-    var image = document.getElementById("img-product1");
+//A partir do produto recupera os dados -> tioo 0 => my, tipo 1 => friends
+function getDetalhes(tipo){
+    
+    var obj;
+    if (tipo == 0){
+        obj = localStorage.getItem("my-livros");
+    }
+    else{
+        obj = localStorage.getItem("friend-livros");
+    }
+    
+    produtos = JSON.parse(obj);
+    console.log(produtos);
+    
+    image = document.getElementById("pic-prod");
     image.src = produtos[0].thumbnail.url;
-
-});
-
-var keyword1 = "Harry Potter";
-$.get("https://sandbox-api.lomadee.com/v2/1508440137937e31d5fb8/product/_search?sourceId=35860773&keyword=" + keyword1, function(data){
-
-    var produtos1 = data["products"];
-
-    // aqui você faza a manipulação do json, exemplo:
-    //console.log(produtos1["0"]);
-
-    document.getElementById("priceMin1").innerHTML = "<label id='priceMin1' for='priceMin1'>"+ produtos1["0"].priceMin + "</label> ";
-    document.getElementById("name1").innerHTML = "<label id='name1' for='name1'>"+ produtos1["0"].name + "</label> ";
-    var image = document.getElementById("img-product2");
-    image.src = produtos1[0].thumbnail.url;
-
-});
-
-var keyword2 = "Sociedade Esportiva Palmeiras";
-$.get("https://sandbox-api.lomadee.com/v2/1508440137937e31d5fb8/product/_search?sourceId=35860773&keyword=" + keyword2, function(data){
-
-    var produtos2 = data["products"];
-
-    // aqui você faza a manipulação do json, exemplo:
-    //console.log(produtos2["0"]);
-
-    document.getElementById("priceMin2").innerHTML = "<label id='priceMin2' for='priceMin2'>"+ produtos2["0"].priceMin + "</label> ";
-    document.getElementById("name2").innerHTML = "<label id='name2' for='name2'>"+ produtos2["0"].name + "</label> ";
-    var image = document.getElementById("img-product3");
-    image.src = produtos2[0].thumbnail.url;
-
-
-});*/
+    document.getElementById("name-prod").innerHTML = "<h5 id='name-prod'>"+ produtos[0].name + "</h5>";
+    document.getElementById("category-prod").innerHTML = "<h5 id='category-prod'>" + produtos[0].category.name + "</h5>";
+    document.getElementById("min-prod").innerHTML = "<h5 id='min-prod'>" + produtos[0].priceMin + "</h5>";
+    document.getElementById("max-prod").innerHTML = "<h5 id='max-prod'>" + produtos[0].priceMax + "</h5>";
+    document.getElementById("estoque-prod").innerHTML = "<h5 id='estoque-prod'>" + produtos[0].category.hasProduct + "</h5>";    
+}
