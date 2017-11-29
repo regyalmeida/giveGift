@@ -17,9 +17,7 @@ window.fbAsyncInit = function() {
             console.log('Logged in.');
             console.log(uid);
             console.log(accessToken);
-            FB.api('/me?fields=id,name,age_range,books.limit(10),games.limit(10),movies.limit(10),music.limit(10),birthday', function(response) {
-                console.log(response.books.data[2].name);
-                window.book = response.books.data[2].name;
+            FB.api('/me?fields=id,name,age_range,books.limit(10),games.limit(10),movies.limit(10),music.limit(10),birthday,first_name', function(response) {
                 console.log(book);
                 console.log('Your picture ' + 'https://graph.facebook.com/' + uid + '/picture?width=140&height=140');
                 
@@ -32,7 +30,20 @@ window.fbAsyncInit = function() {
                 localStorage.setItem(uid, JSON.stringify(response));//Salva no local storage as informacoes do usuario logado
                 
                 //Passa os livros
-                getBooks(response.books, 0);
+                //console.log("Livros");
+                getProducts(response.books, uid, "livro");
+                
+                //Passa os jogos
+                //console.log("Jogos");
+                getProducts(response.games, uid, "jogo");
+                
+                //Passa os filmes
+                //console.log("Filmes");
+                getProducts(response.movies, uid, "filme");
+                
+                //Passa as musicas
+                //console.log("Músicas");
+                getProducts(response.music, uid, "musica");
                 
                 //Recupera informações de usuarios
                 api();
@@ -61,16 +72,6 @@ function login() {
             window.location = "../usuario/profile.html";
         }
     }, {scope: 'public_profile,email,user_friends,email,user_likes'});
-};
-
-function jsonParser(response) {
-    var message = "";
-    var dataArray = response.data;
-    for(var count in dataArray){
-        message = message + dataArray[count].name;
-        message = message + '<br/>';
-    }
-    return message;
 };
 
 function logout() {
@@ -123,17 +124,16 @@ function api(){
         //CARREGA 'ANIVESARIANTES DO MÊS'
         now = new Date;
         mes = now.getMonth() + 1;
-        mes = 10; //temporario -> apenas para teste
+        //mes = 10; //temporario -> apenas para teste
         
         for (var i = 0; i < response.data.length; i++){
             
             //Recupera o usuario
-            //response.data[i].id
-            var obj = localStorage.getItem("1145650655565704");
+            var obj = localStorage.getItem(response.data[i].id);
             user = JSON.parse(obj);
             
             if (user == null){
-                console.log("Data de aniverário do usuario '" + response.data[i].id + "' indisponível");
+                console.log("Usuário indisponível");
             }
             else{
                 if(user.birthday == null){
@@ -175,81 +175,74 @@ function profile(id){
         
         //Armazena os dados
         localStorage.setItem("name_friend", response.data[id].name);
-
         var tmp = 'https://graph.facebook.com/' + response.data[id].id + '/picture?width=140&height=140';
         localStorage.setItem("pic_friend", tmp);
-
         localStorage.setItem("id_friend", response.data[id].id);
-
+        
         //Chama o profile do amigo
         window.location = 'profile_friend.html';
     });
 }
-
-//Recupera livros
-function getBooks(books, tipo){
+function getProducts(resp, id, categoria){
     
     var keyword;
-    console.log(books);
+    console.log(resp);
     
-    for (var i = 0; i < 1; i++){
-        keyword = books.data[i].name;
+    for (var i = 0; i < 5; i++){
+        var j = 0;
+        
+        if (resp.data[i].name == null){
+            break;
+        }
+        else{
+            keyword = resp.data[i].name;    
+        
+        
         $.get("https://sandbox-api.lomadee.com/v2/1508440137937e31d5fb8/product/_search?sourceId=35860773&keyword=" + keyword, function(data){
             var produtos = data["products"];
-            // aqui você faza a manipulação do json, exemplo:
+            console.log(produtos);
             if(produtos == null){
                 console.log("Nao encontrou livros para a keyword: " + keyword);
             }
             else{
-                console.log(produtos[0]);
+                k = j+1;
+                localStorage.setItem(categoria+k+id, JSON.stringify(produtos));
+                //Exemplo: categoria+i+id = "livro01145650655565704" -> representa o livro 0 da pessoa com esse id
                 
-                if (tipo == 0){
-                    localStorage.setItem("my-livros", JSON.stringify(produtos));    
-                }
-                else{
-                    localStorage.setItem("friend-livros", JSON.stringify(produtos));    
-                }
-                
-                document.getElementById("my-product").innerHTML += "<ul class='listrap' id='my-product' for='my-product'>"
-                    + "<li class='row col-xs-12 col-md-4'>"
-                    + "<div class='thumbnail'>" 
-                    + "<a data-toggle='modal' data-target='#basicModal'>"
-                    + "<img id='img-prod" + i + "' src='' class='fb-image-products'/></a></div>" 
-                    + "<ul class='list-inline'>"
-                    + "<li><label id='pricemin-prod" + i + "' for='pricemin-prod" + i + "'>" + produtos[0].priceMin + "</label></li>"
-                    + "<li><label id='name-prod" + i + "' for='name-prod" + i + "'>" + produtos[0].name + "</label></li>"
-                    + "<li class='pull-right'></li></ul>"
-                    + "<a href='#' id='det-prod" + i + "' class='btn btn-warning' data-toggle='modal' data-target='#basicModal'"
-                    + "onclick='getDetalhes(" + tipo + ")'>Detalhes</a>"
-                    + "<a id='link-prod" + i + "' href='" + produtos[0].link + "' class='btn btn-success col-md-6'>Comprar</a></li>"
-                    + "</ul>";
-                
-                image = document.getElementById("img-prod" + i + "");
-                image.src = produtos[0].thumbnail.url;
+                document.getElementById("my-product" + j + "").innerHTML += '<ul class="listrap" id="my-product' + k +'" for="my-product' + k +'">'
+                    + '<li class="row col-xs-12 col-md-4">'
+                    + '<div class="thumbnail">'
+                    + '<a data-toggle="modal" data-target="#basicModal">'
+                    + '<img id="img-prod' + k + '" src="'+ produtos[0].thumbnail.url + '" class="fb-image-products"/></a></div>'
+                    + '<ul class="list-inline">'
+                    + '<li><label id="pricemin-prod' + k + '" for="pricemin-prod"' + i + '">' + produtos[0].priceMin + '</label></li>'
+                    + '<li><label id="name-prod' + k + '" for="name-prod"' + i + '">' + produtos[0].name + '</label></li>'
+                    + '<li class="pull-right"></li></ul>'
+                    + '<a href="#" id="det-prod' + k + '" class="btn btn-warning" data-toggle="modal" data-target="#basicModal"'
+                    + 'onclick="getDetalhes(' + "'" + categoria+k+id + "'" + ')">Detalhes</a>'
+                    + '<a id="link-prod' + k + '" href="' + produtos[0].link + '" class="btn btn-success col-md-6">Comprar</a></li>'
+                    + '</ul>';
+                k--;
+                j++;
             }
         });
+            }
     }
 }
 
-//A partir do produto recupera os dados -> tioo 0 => my, tipo 1 => friends
-function getDetalhes(tipo){
+//Recupera os dados do localStorage -> Exemplo: cat_id => recupera livro01145650655565704
+function getDetalhes(cat_id){
     
-    var obj;
-    if (tipo == 0){
-        obj = localStorage.getItem("my-livros");
-    }
-    else{
-        obj = localStorage.getItem("friend-livros");
-    }
-    
+    var obj = localStorage.getItem(cat_id);
     produtos = JSON.parse(obj);
-    console.log(produtos);
     
     image = document.getElementById("pic-prod");
     image.src = produtos[0].thumbnail.url;
-    document.getElementById("name-prod").innerHTML = "<h5 id='name-prod'>"+ produtos[0].name + "</h5>";
+    
+    document.getElementById("n-prod").innerHTML = "<h5 id='n-prod'>" + produtos[0].name + "</h5>";
     document.getElementById("category-prod").innerHTML = "<h5 id='category-prod'>" + produtos[0].category.name + "</h5>";
     document.getElementById("min-prod").innerHTML = "<h5 id='min-prod'>" + produtos[0].priceMin + "</h5>";
     document.getElementById("max-prod").innerHTML = "<h5 id='max-prod'>" + produtos[0].priceMax + "</h5>";
-    document.getElementById("estoque-prod").innerHTML = "<h5 id='estoque-prod'>" + produtos[0].category.hasProduct + "</h5>";    
+    document.getElementById("estoque-prod").innerHTML = "<h5 id='estoque-prod'>" + produtos[0].category.hasProduct + "</h5>";
+    document.getElementById("desc-prod").innerHTML = "<h5 id='desc-prod'>" + produtos[0].discount + "</h5>";
 }
